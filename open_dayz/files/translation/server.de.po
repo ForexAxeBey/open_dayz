@@ -1,0 +1,8 @@
+#. f.lua
+#: /home/justus/t/f.lua:3
+msgid "Hello world"
+msgstr "Hallo Welt"
+
+#: /home/justus/t/f.lua:4
+msgid "Hello world2"
+msgstr "Hallo Welt2"

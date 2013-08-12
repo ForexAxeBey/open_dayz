@@ -1,0 +1,20 @@
+<def name="Open DayZ types definition">
+	<element name="spawnpoint" friendlyname="Spawnpoint">
+		<data name="position" type="coord3d" description="XYZ position" default="0,0,0" />
+		<data name="rotation" type="integer" description="Z rotation" default="0" />
+		<data name="interior" type="integer" description="GTA interior world" default="0" />
+		<data name="dimension" type="integer" description="MTA dimension" default="0" />
+	</element>
+	<element name="spawnarea" friendlyname="Spawnarea">
+		<data name="positionA" type="coord3d" description="XYZ position" default="0,0,0" />
+		<data name="positionB" type="coord3d" description="XYZ position" default="0,0,0" />
+		<data name="interior" type="integer" description="GTA interior world" default="0" />
+		<data name="dimension" type="integer" description="MTA dimension" default="0" />
+	</element>
+	<element name="nozombiearea" friendlyname="Zombie Free Area">
+		<data name="positionA" type="coord3d" description="XYZ position" default="0,0,0" />
+		<data name="positionB" type="coord3d" description="XYZ position" default="0,0,0" />
+		<data name="interior" type="integer" description="GTA interior world" default="0" />
+		<data name="dimension" type="integer" description="MTA dimension" default="0" />
+	</element>
+</def>

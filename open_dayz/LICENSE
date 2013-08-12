@@ -1,0 +1,20 @@
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Additionally to the terms described in the GPL you are allowed to redistribute Open MTA:DayZ in binary form through the "Multi Theft Auto - San Andreas" application (http://mtasa.com) without providing the source code to your changes. All other terms of the GNU General Public License (GPL) as published by the Free Software Foundation still apply.
+
+The following files of Open MTA:DayZ are not licensed under the GNU General Public License (GPL):
+	* shared/classlib.lua (MIT License)
+	* files/images/HUD/Hunger.png (LinkWare) - http://icons.iconarchive.com/icons/visualpharm/icons8-metro-style/128/Kitchen-Fork-icon.png
+	* files/images/HUD/Thirst.png (LinkWare) - http://icons.iconarchive.com/icons/skuzigraphic/recycling/128/can-icon.png
+	* 

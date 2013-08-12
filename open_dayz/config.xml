@@ -1,0 +1,37 @@
+<config>
+    <statistics>
+        <masterserver_url type="string">http://dayz.jusonex.net/statistics.php</masterserver_url>
+    </statistics>
+    <filecache>
+        <timeout type="number">30000</timeout>
+    </filecache>
+    <transfermanager>
+        <external_webserver_url type="string"></external_webserver_url>
+        <player_max_transferspeed type="number">100000</player_max_transferspeed>
+        <use_external_webserver type="boolean">false</use_external_webserver>
+    </transfermanager>
+    <global>
+        <timescale type="number">1</timescale>
+    </global>
+    <player>
+        <respawntime type="number">2000</respawntime>
+    </player>
+    <sql>
+        <dbtype type="string">sqlite</dbtype>
+        <mysql_database type="string">changeme</mysql_database>
+        <mysql_host type="string">changeme</mysql_host>
+        <mysql_password type="string">changeme</mysql_password>
+        <mysql_unix_socket type="string"></mysql_unix_socket>
+        <mysql_user type="string">changeme</mysql_user>
+        <prefix type="string">dayz</prefix>
+        <sqlite_path type="string">dayz_sqlite.db</sqlite_path>
+    </sql>
+    <anticheat>
+        <allow_d3d9 type="boolean">true</allow_d3d9>
+        <allow_object_model type="boolean">true</allow_object_model>
+        <allow_skin_model type="boolean">true</allow_skin_model>
+        <allow_texture type="boolean">true</allow_texture>
+        <allow_vehicle_model type="boolean">true</allow_vehicle_model>
+        <allow_weapon_model type="boolean">true</allow_weapon_model>
+    </anticheat>
+</config>

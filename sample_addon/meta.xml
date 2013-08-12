@@ -1,0 +1,12 @@
+<meta>
+	<info author="Your name here" name="Sample_Addon" description="Open MTA:DayZ Sample Addon" type="script" version="0.1"/>
+	
+	<oop>false</oop>
+	
+	<!-- Open MTA:DayZ include script (required) -->
+	<script src="include.lua" type="shared"/>
+	
+	<!-- Your scripts here -->
+	<script src="myScript.lua" type="server"/>
+	
+</meta>

@@ -1,0 +1,4 @@
+<map edf:definitions="open_dayz">
+	<spawnpoint posX="0" posY="0" posZ="5"/>
+	<spawnpoint posX="100" posY="10" posZ="15"/>
+</map>
