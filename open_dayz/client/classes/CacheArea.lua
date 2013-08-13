@@ -45,7 +45,7 @@ function CacheArea:drawCached()
 		
 		-- Draw Children
 		for k, v in ipairs(self.m_Children) do
-			if v.m_Visible and v.drawThis then v:drawThis(true) end -- As we do not want to inherit dxElements from CacheArea, we do not have a draw method
+			v:draw(true)
 		end
 		
 		-- Restore render target

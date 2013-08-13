@@ -10,8 +10,8 @@ inherit(GUIFontContainer, GUILabel)
 inherit(GUIColorable, GUILabel)
 
 function GUILabel:constructor(posX, posY, width, height, text, size, parent)
-	assert(type(posX) == "number" and type(posY) == "number" and type(width) == "number" and type(height) == "number", "Bad argument @ GUILabel.constructor")
-
+	checkArgs("GUILabel:constructor", "number", "number", "number", "number")
+	
 	GUIElement.constructor(self, posX, posY, width, height, parent)
 	GUIFontContainer.constructor(self, text, size)
 	GUIColorable.constructor(self)

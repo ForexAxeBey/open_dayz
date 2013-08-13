@@ -29,7 +29,7 @@ function GUIRenderer.updateAll()
 end
 
 function GUIRenderer.drawAll()
-	GUIRenderer.dxroot:draw()
+	--GUIRenderer.dxroot:draw()
 	
 	for k, v in ipairs(GUIRenderer.cache) do
 		v:draw()

@@ -6,53 +6,18 @@
 -- *
 -- ****************************************************************************
 
-GUIElement = inherit(Object)
+GUIElement = inherit(DxElement)
 
 function GUIElement:constructor(posX, posY, width, height, parent)
 	checkArgs("CGUIElement:constructor", "number", "number", "number", "number")
 	assert(type(parent) == "table" or parent == nil, "Bad argument #5 @ GUIElement.constructor")
 
-	self.m_pParent = parent or GUIRenderer.dxroot
+	DxElement.constructor(self, posX, posY, width, height, parent)
 	
-	if self.m_pParent then
-		self.m_pParent.m_Children[#self.m_pParent.m_Children+1] = self
-	end
-	
-	self.m_PosX   = posX
-	self.m_PosY   = posY
-	self.m_Width  = width
-	self.m_Height = height
-	self.m_Children = {}
-
 	-- Hover / Click Events
 	self.m_LActive = false
 	self.m_RActive = false
 	self.m_Hover  = false
-	
-	-- Caching in Rendertargets
-	self:anyChange()
-	self.m_CurrentRenderTarget = false
-
-	-- AbsX and AbsY
-	self.m_AbsoluteX, self.m_AbsoluteY = posX, posY
-	local lastElement = parent or {}
-	while lastElement.m_pParent do
-		self.m_AbsoluteX = self.m_AbsoluteX + lastElement.m_PosX
-		self.m_AbsoluteY = self.m_AbsoluteY + lastElement.m_PosY
-		lastElement = lastElement.m_pParent
-	end
-end
-
-
-function GUIElement:destructor()
-	if self.m_pParent then
-		for k, v in pairs(self.m_pParent.m_Children) do
-			if v == self then
-				table.remove(self.m_pParent.m_Children, k)
-			end
-		end
-	end
-	self = {}
 end
 
 function GUIElement:performChecks(mouse1, mouse2, cx, cy)
@@ -126,7 +91,7 @@ function GUIElement:update()
 	end
 end
 
-function GUIElement:draw(incache)
+--[[function GUIElement:draw(incache)
 	if not incache and getmetatable(self).__index == GUIElement then
 		if self:drawCached() then return end
 	end
@@ -135,9 +100,9 @@ function GUIElement:draw(incache)
 		return
 	end
 	
-	--[[if self ~= CGUIRenderer.dxroot then
-		debugMsg("COND: "..tostring(getmetatable(self).__index == CGUILabel))
-	end]]
+	--if self ~= CGUIRenderer.dxroot then
+		--debugMsg("COND: "..tostring(getmetatable(self).__index == CGUILabel))
+	--end
 
 	-- Draw Self
 	if self.drawThis then self:drawThis(incache) end
@@ -183,7 +148,7 @@ function GUIElement:drawCached()
 	dxSetBlendMode("blend")
 	
 	return true
-end
+end--]]
 
 function GUIElement.getHoveredElement()
 	return GUIElement.HoveredElement
@@ -204,42 +169,11 @@ function GUIElement:isCursorWithinBox(x1, y1, x2, y2)
 end
 
 GUIElement._change = {}
-function GUIElement:anyChange()
+--[[function GUIElement:anyChange()
 	self.m_ChangedSinceLastFrame = true
 	-- Go up the tree
 	if self.m_pParent then self.m_pParent:anyChange() end
-end
-
-function GUIElement:getChildren()
-	return self.m_Children
-end
-
-function GUIElement:isVisible()
-	return self.m_Visible
-end
-
-function GUIElement:setVisible(visible)
-	self.m_Visible = visible
-	self:anyChange()
-end
-
-function GUIElement:getPosition()
-	return self.m_PosX, self.m_PosY
-end
-
-function GUIElement:setPosition(posX, posY)
-	self.m_PosX, self.m_PosY = posX, posY
-
-	self.m_AbsoluteX, self.m_AbsoluteY = posX, posY
-	local lastElement = parent or {}
-	while lastElement.m_pParent do
-		self.m_AbsoluteX = self.m_AbsoluteX + lastElement.m_PosX
-		self.m_AbsoluteY = self.m_AbsoluteY + lastElement.m_PosY
-		lastElement = lastElement.m_pParent
-	end
-
-	self:anyChange()
-end
+end--]]
 
 
 function GUIElement._change:m_PosX(newval)

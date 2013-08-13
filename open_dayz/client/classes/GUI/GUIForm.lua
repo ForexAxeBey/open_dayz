@@ -6,17 +6,17 @@
 -- *
 -- ****************************************************************************
 
-GUIForm = inherit(GUIElement)
+GUIForm = inherit(CacheArea)
 
 function GUIForm:constructor(posX, posY, width, height)
 	checkArgs("GUIForm:constructor", "number", "number", "number", "number")
 	
-	GUIElement.constructor(self, posX or 0, posY or 0, width or screenWidth, height or screenHeight)
+	CacheArea.constructor(self, posX or 0, posY or 0, width or screenWidth, height or screenHeight)
 end
 
 function GUIForm:destructor()
-	-- Replace this by derived_destructor
-	CGUIElement.destructor(self)
+	-- Todo: Replace this by derived_destructor
+	CacheArea.destructor(self)
 end
 
 function GUIForm:close()
