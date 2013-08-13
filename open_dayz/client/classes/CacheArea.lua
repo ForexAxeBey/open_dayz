@@ -7,18 +7,17 @@
 -- ****************************************************************************
 CacheArea = inherit(DxElement)
 
-function CacheArea:constructor(posX, posY, width, height)
+function CacheArea:constructor(posX, posY, width, height, containsGUIElements)
 	DxElement.constructor(self, posX, posY, width, height)
 
 	table.insert(GUIRenderer.cache, self)
 
 	self.m_RenderTarget = dxCreateRenderTarget(width, height, true)
 	
+	self.m_ContainsGUIElements = containsGUIElements
 end
 
 function CacheArea:updateArea()
-	if not self then outputConsole(debug.traceback()) end
-
 	self.m_ChangedSinceLastFrame = true
 	-- Go up the tree
 	if self.m_Parent then self.m_Parent:anyChange() end
@@ -66,15 +65,23 @@ function CacheArea:draw(incache)
 		if self:drawCached() then return end
 	end
 
+	-- Do not waste time in drawing invisible elements
 	if self.m_Visible == false then
 		return
 	end
 	
-	-- Draw Self
-	if self.drawThis then self:drawThis(incache) end
-
 	-- Draw Children
 	for k, v in ipairs(self.m_Children) do
 		if v.draw then v:draw(incache) end
 	end
 end
+
+function CacheArea:performChecks()
+	-- Update GUI children
+	for k, v in ipairs(self.m_Children) do
+		if v.update then
+			v:update()
+		end
+	end
+end
+

@@ -10,8 +10,7 @@ GUIRenderer = {cache = {}}
 
 function GUIRenderer.constructor()	
 	-- Create a default cache area
-	GUIRenderer.guiroot = GUIElement:new(0, 0, screenWidth, screenHeight)
-	GUIRenderer.cacheroot = CacheArea:new(0, 0, screenWidth, screenHeight)
+	GUIRenderer.cacheroot = CacheArea:new(0, 0, screenWidth, screenHeight, true)
 	
 	addEventHandler("onClientPreRender", root, GUIRenderer.updateAll)
 	addEventHandler("onClientRender", root, GUIRenderer.drawAll)
@@ -24,7 +23,11 @@ function GUIRenderer.destructor()
 end
 
 function GUIRenderer.updateAll()
-	GUIRenderer.guiroot:update()
+	for k, v in ipairs(GUIRenderer.cache) do
+		if v.m_ContainsGUIElements then
+			v:performChecks()
+		end
+	end
 end
 
 function GUIRenderer.drawAll()

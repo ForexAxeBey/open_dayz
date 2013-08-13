@@ -10,9 +10,8 @@ POParser = inherit(Object)
 function POParser:constructor(poPath)
 	self.m_Strings = {}
 
-	local fileHandle = fileOpen(poPath, true)
-	local content = fileRead(fileHandle, fileGetSize(fileHandle))
-	local lines = split(content, "\n")
+	local file = File.Open(poPath, true)
+	local lines = split(assert(file:getContent(), "Read the translation file failed"), "\n")
 	
 	local lastKey
 	for i, line in ipairs(lines) do

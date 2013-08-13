@@ -15,6 +15,6 @@ Additionally to the terms described in the GPL you are allowed to redistribute O
 
 The following files of Open MTA:DayZ are not licensed under the GNU General Public License (GPL):
 	* shared/classlib.lua (MIT License)
-	* files/images/HUD/Hunger.png (LinkWare) - http://icons.iconarchive.com/icons/visualpharm/icons8-metro-style/128/Kitchen-Fork-icon.png
+	* files/images/HUD/Hunger.png (commercial free, no backlink) - https://www.iconfinder.com/icons/106166/download/png/128
 	* files/images/HUD/Thirst.png (LinkWare) - http://icons.iconarchive.com/icons/skuzigraphic/recycling/128/can-icon.png
 	* 

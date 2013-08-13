@@ -135,6 +135,7 @@
 		
 		<script src="client/classes/GUIForms/FormTest.lua" type="client"/>
 		<script src="client/classes/GUIForms/MouseMenu/PlayerMouseMenu.lua" type="client"/>
+		<script src="client/classes/GUIForms/MouseMenu/VehicleMouseMenu.lua" type="client"/>
 		
 		<script src="client/classes/MTAElement.lua" type="client"/>
 		<script src="client/classes/Server.lua" type="client" />

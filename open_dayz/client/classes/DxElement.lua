@@ -46,6 +46,7 @@ function DxElement:destructor()
 			end
 		end
 	end
+	self:anyChange()
 end
 
 function DxElement:anyChange()
@@ -87,6 +88,16 @@ end
 
 function DxElement:getChildren()
 	return self.m_Children
+end
+
+function DxElement:getParent()
+	return self.m_Parent
+end
+
+function DxElement:setParent(parent)
+	self.m_Parent = parent
+	parent.m_Children[#self.m_Parent.m_Children+1] = self
+	self:anyChange()
 end
 
 function DxElement:getPosition()

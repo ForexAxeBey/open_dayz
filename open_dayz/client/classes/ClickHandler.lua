@@ -11,6 +11,7 @@ function ClickHandler:constructor()
 	self.m_OpenMenus = {}
 	self.m_Menu = {
 		player = PlayerMouseMenu;
+		vehicle = VehicleMouseMenu;
 	}
 	addEventHandler("onClientClick", root, bind(self.dispatchClick, self))
 end
