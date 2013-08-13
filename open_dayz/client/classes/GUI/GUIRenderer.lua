@@ -6,13 +6,12 @@
 -- *
 -- ****************************************************************************
 
-GUIRenderer = {}
+GUIRenderer = {cache = {}}
 
 function GUIRenderer.constructor()	
-	GUIRenderer.dxroot = GUIElement:new(0, 0, screenWidth, screenHeight)
-	GUIRenderer.dxroot_t = DxElement:new(0, 0, screenWidth, screenHeight) -- Todo: Use the same dxroot
-	
-	GUIRenderer.cache = {}
+	-- Create a default cache area
+	GUIRenderer.guiroot = GUIElement:new(0, 0, screenWidth, screenHeight)
+	GUIRenderer.cacheroot = CacheArea:new(0, 0, screenWidth, screenHeight)
 	
 	addEventHandler("onClientPreRender", root, GUIRenderer.updateAll)
 	addEventHandler("onClientRender", root, GUIRenderer.drawAll)
@@ -25,12 +24,10 @@ function GUIRenderer.destructor()
 end
 
 function GUIRenderer.updateAll()
-	GUIRenderer.dxroot:update()
+	GUIRenderer.guiroot:update()
 end
 
 function GUIRenderer.drawAll()
-	--GUIRenderer.dxroot:draw()
-	
 	for k, v in ipairs(GUIRenderer.cache) do
 		v:draw()
 	end

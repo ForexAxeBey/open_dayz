@@ -66,8 +66,8 @@ end
 --- Closes the window
 function GUIWindow:close()
 	-- Jusonex: Destroy or close, I dunno what's better
-	if self.m_pParent then
-		delete(self.m_pParent)
+	if self.m_Parent then
+		delete(self.m_Parent)
 	else
 		delete(self)
 	end

@@ -21,7 +21,7 @@ function CacheArea:updateArea()
 
 	self.m_ChangedSinceLastFrame = true
 	-- Go up the tree
-	if self.m_pParent then self.m_pParent:anyChange() end
+	if self.m_Parent then self.m_Parent:anyChange() end
 end
 
 function CacheArea:drawCached()

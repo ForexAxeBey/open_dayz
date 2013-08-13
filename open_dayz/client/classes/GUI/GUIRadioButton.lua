@@ -11,16 +11,9 @@ inherit(GUIFontContainer, GUIRadioButton)
 
 local GUI_RADIO_TEXT_MARGIN = 5
 
---- Initialize the GUI radio button
--- @param self object instance
--- @param posX The x-position
--- @param posY The y-position
--- @param width Width of this element (text included)
--- @param height The height of this element (determines the size of the box)
--- @param text The caption
--- @param parent The parent
 function GUIRadioButton:constructor(posX, posY, width, height, text, parent)
 	checkArgs("GUIRadioButton.constructor", "number", "number", "number", "number")
+	
 	if not instanceof(parent, GUIRadioButtonGroup) then
 		error("GUIRadioButton's parent should be a GUIRadioButtonGroup")
 	end
@@ -32,30 +25,26 @@ function GUIRadioButton:constructor(posX, posY, width, height, text, parent)
 	self.m_Checked = false
 
 	-- Mark first item in radio button group as checked
-	if self.m_pParent and not self.m_pParent.m_pCheckedRadio then
+	if self.m_Parent and not self.m_Parent.m_pCheckedRadio then
 		self:setChecked(true)
 	end
 end
 
 function GUIRadioButton:onInternalLeftClick()
-	if self.m_pParent then -- Should always exist
+	if self.m_Parent then -- Should always exist
 		self:setChecked(not self:isChecked())
 	end
 end
 
---- Mark the radio button as checked
--- @param bChecked Checked state
 function GUIRadioButton:setChecked(bChecked)
 	if bChecked then
-		self.m_pParent:setCheckedRadioButton(self)
+		self.m_Parent:setCheckedRadioButton(self)
 	end
 
 	self.m_Checked = bChecked
 	self:anyChange()
 end
 
---- Get the checked status
--- @return boolean whether the radio button is checked or not
 function GUIRadioButton:isChecked()
 	return self.m_Checked
 end
