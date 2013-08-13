@@ -117,5 +117,8 @@ function Core:onConfigChange(config, group, key, oldvalue, newvalue)
 	) then
 		triggerEvent("onConfigChange", root, self.m_ClientConfig, "client", key, self.m_ClientConfig[key], newvalue)
 		self.m_ClientConfig[key] = newvalue
+	elseif group == "weather" then
+		self.m_ClientConfig["weather"][key] = self.m_ClientConfig["weather"][key] or {}
+		self.m_ClientConfig["weather"][key] = newvalue
 	end
 end

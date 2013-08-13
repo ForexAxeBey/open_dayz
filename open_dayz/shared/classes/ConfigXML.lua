@@ -48,13 +48,10 @@ end
 function ConfigXML:_open()
 	if not self.m_Root then
 		if not fileExists(self.m_File) then
-			outputDebug("xmlCreateFile")
 			self.m_Root = xmlCreateFile(self.m_File, self.m_Name)
-			outputDebug("fileExists - "..tostring(fileExists(self.m_File)))
-			outputDebug("self.m_Root - "..tostring(self.m_Root))
-			outputDebug("save - "..tostring(xmlSaveFile(self.m_Root)))
 		else
 			self.m_Root = xmlLoadFile(self.m_File)
+			assert(self.m_Root, "ConfigXML - Cannot load config file") 
 		end
 	end
 end

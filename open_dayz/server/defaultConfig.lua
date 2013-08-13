@@ -39,26 +39,7 @@ local defaultConfig =
 	};
 	
 	client = {
-		weather = {
-			-- ToDo: Make this scary
-			hour_01 = {
-				sky_gradient = { 0, 100, 196, 136, 170, 212 };
-				farclip_distance = 100;
-				fog_distance = 100;
-			};
-			
-			hour_12 = {
-				sky_gradient = { 0, 100, 196, 136, 170, 212 };
-				farclip_distance = 50;
-				fog_distance = 100;
-			};
-
-			hour_24 = {
-				sky_gradient = { 0, 100, 196, 136, 170, 212 };
-				farclip_distance = 100;
-				fog_distance = 100;
-			};
-		}
+		weather = {}
 	};
 	
 	player = {
@@ -67,8 +48,50 @@ local defaultConfig =
 	
 	global = {
 		timescale = 1.0;
+		weather = {
+			-- ToDo: Make this scary
+			hour_00 = {
+				sky_gradient = { 
+					topr = 0;
+					topg = 100;
+					topb = 196;
+					botr = 136;
+					botg = 170;
+					botb = 212 
+				};
+				farclip_distance = 200;
+				fog_distance = 100;
+			};
+				
+			hour_12 = {
+				sky_gradient = { 
+					topr = 0;
+					topg = 100;
+					topb = 196;
+					botr = 136;
+					botg = 170;
+					botb = 212 
+				};
+				farclip_distance = 500;
+				fog_distance = 100;
+			};
+			
+			hour_18 = {
+				sky_gradient = { 
+					topr = 0;
+					topg = 100;
+					topb = 196;
+					botr = 136;
+					botg = 170;
+					botb = 212 
+				};
+				farclip_distance = 300;
+				fog_distance = 100;
+			};
+		};
 	};
 	
+
 	statistics = {
 		masterserver_url = "http://dayz.jusonex.net/statistics.php";
 	}
@@ -86,4 +109,6 @@ function Core:applyDefaultConfig()
 			end
 		end
 	end
+	
+	self.m_ClientConfig["weather"] = self.m_MainConfig:get("global", "weather")
 end
