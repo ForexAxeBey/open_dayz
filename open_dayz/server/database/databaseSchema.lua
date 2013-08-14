@@ -64,3 +64,14 @@ DBSchema.inventory_slot =
 { name = "Height", 	vartype = "int",  unsigned = true, allowNULL = false };
 { name = "Content", vartype = "text", unsigned = true, allowNULL = false };
 }
+
+DBSchema.groups = {
+{ name = "Id",	vartype = "int",	unsigned = true, autoincrement = true, allowNULL = false, primaryKey = true };
+{ name = "Name",vartype = "varchar",length = 32, allowNULL = false };
+}
+
+DBSchema.groups_players = {
+{ name = "GroupId", vartype = "int", unsigned = true, primaryKey = true, allowNULL = false };
+{ name = "UserId", vartype = "int", unsigned = true, allowNULL = false };
+{ name = "Rank", vartype = "tinyint", unsigned = true, allowNULL = false };
+}

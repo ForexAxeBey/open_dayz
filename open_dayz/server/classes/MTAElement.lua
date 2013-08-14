@@ -5,7 +5,7 @@
 -- *  PURPOSE:     MTA element class
 -- *
 -- ****************************************************************************
-MTAElement = inherit(Object)
+MTAElement = inherit(Exported)
 --registerElementClass("element", MTAElement)
 
 function MTAElement:constructor()

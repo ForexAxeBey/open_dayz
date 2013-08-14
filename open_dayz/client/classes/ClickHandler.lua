@@ -17,19 +17,21 @@ function ClickHandler:constructor()
 end
 
 function ClickHandler:dispatchClick(button, state, absoluteX, absoluteY, worldX, worldY, worldZ, element)
-	if button == "right" and state == "up" then
-		if not element or not isElement(element) then
-			return
-		end
-	
-		local elementType = getElementType(element)
-		if self.m_Menu[elementType] --[[and not element == localPlayer]] then
-			table.insert(self.m_OpenMenus, self.m_Menu[elementType]:new(absoluteX, absoluteY))
-		end
-	elseif button == "left" and state == "up" then
+	if state == "up" then
 		-- Close all currently opened menus
 		for k, menu in ipairs(self.m_OpenMenus) do
 			delete(menu)
+		end
+	
+		if button == "right" then
+			if not element or not isElement(element) then
+				return
+			end
+		
+			local elementType = getElementType(element)
+			if self.m_Menu[elementType] --[[and not element == localPlayer]] then
+				table.insert(self.m_OpenMenus, self.m_Menu[elementType]:new(absoluteX, absoluteY))
+			end
 		end
 	end
 end

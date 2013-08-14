@@ -99,7 +99,7 @@ end
 
 function DxElement:setParent(parent)
 	-- Unlink from old parent first
-	table.remove(self.m_Parent.m_Children, table.find(self))
+	table.remove(self.m_Parent.m_Children, table.find(self.m_Parent.m_Children, self))
 
 	-- Set the new parent element and link
 	self.m_Parent = parent
