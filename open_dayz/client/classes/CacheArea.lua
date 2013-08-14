@@ -12,6 +12,7 @@ function CacheArea:constructor(posX, posY, width, height, containsGUIElements, c
 
 	table.insert(GUIRenderer.cache, self)
 	
+	self.m_TimeoutCounter = 0
 	self.m_ContainsGUIElements = containsGUIElements
 	self:setCachingEnabled(cachingEnabled == nil and true or cachingEnabled)
 end
@@ -30,9 +31,18 @@ function CacheArea:drawCached()
 		end
 		
 		if not self.m_RenderTarget then
-			-- We cannot cache (probably video memory low )
+			-- We cannot cache (probably video memory low)
 			-- Just draw normally and retry next frame
-			-- Maybe add a timeout
+			-- and increment the timeout counter
+			self.m_TimeoutCounter = self.m_TimeoutCounter + 1
+			
+			-- Turn caching after 5 retries of | Todo: Try to re-enable caching later
+			if self.m_TimeoutCounter >= 5 then
+				self:setCachingEnabled(false)
+				self.m_TimeoutCounter = 0
+				outputDebugString("Caching has been disabled due to low video memory")
+			end
+			
 			return false
 		end
 		
@@ -102,7 +112,7 @@ function CacheArea:setCachingEnabled(state)
 		end
 		
 		-- Destroy the renderTarget to clear it
-		destroyElement(self.m_RenderTarget)
+		if self.m_RenderTarget and isElement(self.m_RenderTarget) then destroyElement(self.m_RenderTarget) end
 	end
 	self.m_CachingEnabled = state
 end
