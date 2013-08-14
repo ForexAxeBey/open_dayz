@@ -7,29 +7,29 @@
 -- ****************************************************************************
 CacheArea = inherit(DxElement)
 
-function CacheArea:constructor(posX, posY, width, height, containsGUIElements)
+function CacheArea:constructor(posX, posY, width, height, containsGUIElements, cachingEnabled)
 	DxElement.constructor(self, posX, posY, width, height)
 
 	table.insert(GUIRenderer.cache, self)
-
-	self.m_RenderTarget = dxCreateRenderTarget(width, height, true)
 	
 	self.m_ContainsGUIElements = containsGUIElements
+	self:setCachingEnabled(cachingEnabled == nil and true or cachingEnabled)
 end
 
 function CacheArea:updateArea()
 	self.m_ChangedSinceLastFrame = true
+	
 	-- Go up the tree
 	if self.m_Parent then self.m_Parent:anyChange() end
 end
 
 function CacheArea:drawCached()
-	if self.m_ChangedSinceLastFrame or not self.m_CurrentRenderTarget then
-		if not self.m_CurrentRenderTarget then
-			self.m_CurrentRenderTarget = dxCreateRenderTarget(self.m_Width, self.m_Height, true)
+	if self.m_ChangedSinceLastFrame or not self.m_RenderTarget then
+		if not self.m_RenderTarget then
+			self.m_RenderTarget = dxCreateRenderTarget(self.m_Width, self.m_Height, true)
 		end
 		
-		if not self.m_CurrentRenderTarget then
+		if not self.m_RenderTarget then
 			-- We cannot cache (probably video memory low )
 			-- Just draw normally and retry next frame
 			-- Maybe add a timeout
@@ -37,7 +37,7 @@ function CacheArea:drawCached()
 		end
 		
 		-- We got a render Target so go on and render to it
-		dxSetRenderTarget(self.m_CurrentRenderTarget, true)
+		dxSetRenderTarget(self.m_RenderTarget, true)
 		
 		-- Per definition we cannot have a drawThis method as only GUIElement instances
 		-- may be cached (to avoid caching single texts / images etc.)
@@ -54,14 +54,14 @@ function CacheArea:drawCached()
 	
 	-- Render! :>
 	dxSetBlendMode("add")
-	dxDrawImage(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, self.m_CurrentRenderTarget)
+	dxDrawImage(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, self.m_RenderTarget)
 	dxSetBlendMode("blend")
 	
 	return true
 end
 
 function CacheArea:draw(incache)
-	if not incache then
+	if self.m_CachingEnabled and not incache then
 		if self:drawCached() then return end
 	end
 
@@ -85,3 +85,24 @@ function CacheArea:performChecks()
 	end
 end
 
+function CacheArea:setCachingEnabled(state)
+	if not self.m_CachingEnabled and state then
+		-- We have to adjust the position as the rendertarget is relative itself
+		for k, v in ipairs(self.m_Children) do
+			v:setPosition(v.m_PosX - self.m_PosX, v.m_PosY - self.m_PosY)
+		end
+		
+		-- Create our renderTarget
+		self.m_RenderTarget = dxCreateRenderTarget(self.m_Width, self.m_Height, true)
+		
+	elseif self.m_CachingEnabled and not state then
+		-- Do the recent steps in reverse
+		for k, v in ipairs(self.m_Children) do
+			v:setPosition(v.m_PosX + self.m_PosX, v.m_PosY + self.m_PosY)
+		end
+		
+		-- Destroy the renderTarget to clear it
+		destroyElement(self.m_RenderTarget)
+	end
+	self.m_CachingEnabled = state
+end

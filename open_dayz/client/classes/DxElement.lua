@@ -30,10 +30,13 @@ function DxElement:constructor(posX, posY, width, height, parent)
 	
 	-- AbsX and AbsY
 	self.m_AbsoluteX, self.m_AbsoluteY = posX, posY
-	local lastElement = parent or {}
-	while lastElement.m_Parent do
-		self.m_AbsoluteX = self.m_AbsoluteX + lastElement.m_PosX
-		self.m_AbsoluteY = self.m_AbsoluteY + lastElement.m_PosY
+	local lastElement = parent
+	while lastElement do
+		-- Ignore cache areas as rendertargets has their position themself
+		if not instanceof(lastElement, CacheArea) then
+			self.m_AbsoluteX = self.m_AbsoluteX + lastElement.m_PosX
+			self.m_AbsoluteY = self.m_AbsoluteY + lastElement.m_PosY
+		end
 		lastElement = lastElement.m_Parent
 	end
 end
@@ -95,8 +98,13 @@ function DxElement:getParent()
 end
 
 function DxElement:setParent(parent)
+	-- Unlink from old parent first
+	table.remove(self.m_Parent.m_Children, table.find(self))
+
+	-- Set the new parent element and link
 	self.m_Parent = parent
 	parent.m_Children[#self.m_Parent.m_Children+1] = self
+	
 	self:anyChange()
 end
 

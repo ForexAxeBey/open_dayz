@@ -11,7 +11,7 @@ function POParser:constructor(poPath)
 	self.m_Strings = {}
 
 	local file = File.Open(poPath, true)
-	local lines = split(assert(file:getContent(), "Read the translation file failed"), "\n")
+	local lines = split(assert(file:getContent(), "Reading the translation file failed"), "\n")
 	
 	local lastKey
 	for i, line in ipairs(lines) do

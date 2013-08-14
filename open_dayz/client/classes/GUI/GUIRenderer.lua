@@ -39,6 +39,6 @@ end
 function GUIRenderer.restore(clearedRenderTargets)
 	if clearedRenderTargets then
 		-- Redraw render target(s)
-		GUIRenderer.dxroot:anyChange()
+		GUIRenderer.cacheroot:updateArea()
 	end
 end
