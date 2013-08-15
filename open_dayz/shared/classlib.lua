@@ -212,14 +212,22 @@ function utils.class.instanceof(self, class, direct)
 	return check
 end
 
---// utils.class.bind(func, self)
---||	@desc:	Wraps the function(...) return function(self, ...) end idiom
+--// utils.class.bind(func, ...)
+--||	@desc:	Returns a function with the parameters passed to bind, bound in order, similar to std::bind
 --||	@param:	table 'func' 			  -	The function to bind
---||	@param:	table 'self' 			  -	The instance to bind to
+--||	@param:	vararg '...' 			  -	The parameters to bind to
 --||	@return:function - the bound function
 --\\
-function utils.class.bind(func, self)
-	return function(...) return func(self, ...) end 
+function utils.class.bind(func, ...)
+	local boundArgs = {...}
+	return 
+		function(...) 
+			local arg = boundArgs
+			for k, v in pairs({...}) do
+				arg[#arg+1] = v
+			end
+			return func(unpack(arg)) 
+		end 
 end
 
 --// utils.class.load(class, ...)
