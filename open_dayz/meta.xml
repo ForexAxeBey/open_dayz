@@ -24,7 +24,6 @@
 	<script src="shared/RPCs.lua"		type="shared"/>
 	<script src="shared/addon.lua"		type="shared"/>
 	<script src="shared/version.lua"	type="shared"/>
-	<script src="shared/items.lua"		type="shared"/>
 	<script src="shared/SharedEnums.lua"type="shared"/>
 	
 	<script src="shared/classes/Object.lua" type="shared"/>
@@ -169,7 +168,9 @@
 		<script src="client/main.lua" type="client"/>
 		<script src="client/tempLogin.lua" type="client"/>
 		
-		
+	<!-- Shared (loaded later due to dependencies) -->
+	<script src="shared/items.lua"		type="shared"/>
+	
 	<!-- Exports -->
 	<export function="callMethod" type="server"/>
 	<export function="callMethod" type="client"/>

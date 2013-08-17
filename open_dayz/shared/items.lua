@@ -42,13 +42,17 @@ BASEBALLBAT = { 17, "Baseball Bat", 2,			{1,1},		0,			ITEM_SLOT_SECONDARY_WEAPON
 SHOVEL 		= { 18, "Shovel", 		2,			{1,1},		0,			ITEM_SLOT_SECONDARY_WEAPON },
 GOLF 		= { 19, "Golf Club", 	2,			{1,1},		0,			ITEM_SLOT_SECONDARY_WEAPON },
 
+-- Toolbelt
+MEDICKIT	= { 20, "Medic Kit",	1,			{1,1},		5,			ITEM_SLOT_TOOLBELT,			ItemMedicKit },
+RADAR		= { 21, "Radar",		1,			{1,1},		0,			ITEM_SLOT_TOOLBELT,			ItemRadar },
+
 -- Add more below
 }
 
 -- Apply some magic to allow accessing stuff in a nice way
 local NiceItems = {}
 for k, v in pairs(Items) do
-	NiceItems[k] = { UID = v[1], Name = v[2], Weight = v[3], Size = v[4], MaxStack = v[5], Slot = v[6] }
+	NiceItems[k] = { UID = v[1], Name = v[2], Weight = v[3], Size = v[4], MaxStack = v[5], Slot = v[6], Class = v[7] }
 	NiceItems[v[1]] = NiceItems[k]
 end
 Items = NiceItems

@@ -84,7 +84,7 @@ function Inventory:setItem(item, slot, x, y)
 	if self.m_Slots[slot][x][y] == false then return false end
 	
 	-- all good!
-	self.m_Slots[slot][x][y] = Item:new(item.UID)
+	self.m_Slots[slot][x][y] = (Items[item].Class or Item):new(item.UID)
 	return true
 end
 
