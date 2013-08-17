@@ -8,20 +8,24 @@
 GUICursor = inherit(Singleton)
 
 function GUICursor:constructor()
-	-- Are we able to hide our cursor (backwards compalibility)
-	if setCursorAlpha then
-		-- Hide the old cursor
-		setCursorAlpha(0)
-
-		-- Draw a new
-		addEventHandler("onClientRender", root, GUICursor.draw)
-	end
+	TransferManager:getSingleton():requestFilesAsOnce(
+	{	"files/images/HUD/Cursor.png";
+	}
+	, bind(GUICursor.load, self))
 
 	bindKey("b", "down", function() showCursor(not isCursorShowing()) end)
 end
 
 function GUICursor:destructor()
 	setCursorAlpha(255)
+end
+
+function GUICursor:load()
+	-- Hide the old cursor
+	setCursorAlpha(0)
+
+	-- Draw a new
+	addEventHandler("onClientRender", root, GUICursor.draw)
 end
 
 function GUICursor.draw()
