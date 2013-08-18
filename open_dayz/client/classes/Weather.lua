@@ -8,13 +8,21 @@
 Weather = inherit(Singleton)
 
 function Weather:constructor()
+	self.m_Active = false
+end
+
+function Weather:rebuild()
 	self.m_WeatherInfo = {}
 	self.m_NextIndex = 1
 	self.m_Current = nil
 	
 	self:buildInfo()
 	self:update()
-	setTimer(bind(Weather.update, self), 1000*60, 0)
+	
+	if not self.m_Active then
+		setTimer(bind(Weather.update, self), 1000*60, 0)
+		self.m_Active = true
+	end
 end
 
 function Weather:buildInfo()

@@ -5,7 +5,7 @@
 -- *  PURPOSE:     Hunger HUD element class
 -- *
 -- ****************************************************************************
-HUDThirst = inherit(HUDThirst)
+HUDThirst = inherit(HUDElement)
 
 function HUDThirst:constructor(posX, posY, width, height, parent)
 	HUDElement.constructor(self, posX, posY, width, height, parent)

@@ -42,7 +42,6 @@ function Core:constructor()
 	NPCManager:new()
 	ShaderManager:new()
 	ModManager:new()
-	
 end
 
 function Core:destructor()
@@ -58,7 +57,7 @@ function Core:destructor()
 end
 
 function Core:onConfigRetrieve()
-	Weather:new()
+	Weather:rebuild()
 end
 
 function Core:set(group, key, value)

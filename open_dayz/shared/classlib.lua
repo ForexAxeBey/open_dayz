@@ -358,7 +358,7 @@ end
 --||
 --|| 	Parameters for func: 	  function (table/element instance, any value)
 --||
---|| Syntax 2: utils.class.addChangeHandler(instance, func, func)
+--|| Syntax 2: utils.class.addChangeHandler(instance, func)
 --||	@desc:	addChangeHandler calls 'func' whenever any key is changed on 'instance'
 --||	@param:	table instance  - any table to watch for changes
 --||	@param:	function func	- the function to call when the value of any index in instance is changed
