@@ -25,5 +25,6 @@ end
 
 function HUDHunger:load()
 	self.m_Active = true
+	self:anyChange()
 end
 

@@ -10,6 +10,7 @@ LocalPlayer = inherit(Player)
 function LocalPlayer:constructor()
 	self.m_Hunger = 100
 	self.m_Thirst = 100
+	self.m_Locale = "en"
 end
 
 function LocalPlayer:destructor()
@@ -37,6 +38,10 @@ function LocalPlayer:register(username, password)
 	self:rpc(RPC_PLAYER_REGISTER, username, password, salt)
 end
 
+function LocalPlayer:onLogin()
+	HUDArea:getSingleton():show()
+end
+
 function LocalPlayer:rpc(rpc, ...)
 	assert(rpc, "Missing RPC called")
 	triggerServerEvent("onRPC", resourceRoot, rpc, self, ...)
@@ -47,13 +52,13 @@ function LocalPlayer:sendMessage(text, r, g, b, ...)
 end
 
 function LocalPlayer:getLocale()
-	return --[[self.m_Locale]]"en"
+	return self.m_Locale
 end
 
-function Player:getHunger()
+function LocalPlayer:getHunger()
 	return self.m_Hunger
 end
 
-function Player:getThirst()
+function LocalPlayer:getThirst()
 	return self.m_Thirst
 end

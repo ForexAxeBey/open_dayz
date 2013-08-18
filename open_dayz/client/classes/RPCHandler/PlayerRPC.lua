@@ -46,6 +46,7 @@ function PlayerRPC.playerLogin(player, status, reason)
 		end
 	elseif status == RPC_STATUS_SUCCESS then
 		localPlayer:sendMessage(_"Sucessfully logged in!")
+		localPlayer:onLogin()
 	end
 end
 
@@ -60,6 +61,7 @@ function PlayerRPC.playerRegister(player, status, reason)
 		end
 	elseif status == RPC_STATUS_SUCCESS then
 		localPlayer:sendMessage(_"Sucessfully registered!")
+		localPlayer:onLogin()
 	end
 end
 

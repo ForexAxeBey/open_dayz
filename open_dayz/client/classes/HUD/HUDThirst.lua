@@ -25,4 +25,5 @@ end
 
 function HUDThirst:load()
 	self.m_Active = true
+	self:anyChange()
 end
