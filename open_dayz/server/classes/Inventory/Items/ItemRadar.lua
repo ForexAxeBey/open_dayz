@@ -8,9 +8,6 @@
 ItemRadar = inherit(Item)
 
 function ItemRadar:enable(player)
-	-- Call the super class constructor
-	Item.constructor(self, player)
-
 	-- Show the radar
 	showPlayerHudComponent(player, "radar", true)
 end
@@ -18,9 +15,6 @@ end
 function ItemRadar:disable(player)
 	-- Hide the radar
 	showPlayerHudComponent(player, "radar", false)
-
-	-- Call the super class destructor
-	Item.destructor(self, player)
 end
 
 function ItemRadar:use(player)

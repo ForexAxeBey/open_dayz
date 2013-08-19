@@ -46,6 +46,10 @@ GOLF 		= { 19, "Golf Club", 	2,			{1,1},		0,			ITEM_SLOT_SECONDARY_WEAPON },
 MEDICKIT	= { 20, "Medic Kit",	1,			{1,1},		5,			ITEM_SLOT_TOOLBELT,			ItemMedicKit },
 RADAR		= { 21, "Radar",		1,			{1,1},		0,			ITEM_SLOT_TOOLBELT,			ItemRadar },
 
+-- Food
+BURGER		= { 22, "Burger",		1,			{1,1},		0,			ITEM_SLOT_MAIN,				ItemFood },
+PIZZA		= { 23, "Pizza",		1,			{1,1},		0,			ITEM_SLOT_MAIN,				ItemFood },
+
 -- Add more below
 }
 

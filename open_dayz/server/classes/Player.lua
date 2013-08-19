@@ -167,9 +167,6 @@ function Player:respawn()
 	setCameraTarget(self, self)
 end
 
-enum("NECESSITY_HUNGER", "necessity")
-enum("NECESSITY_THIRST", "necessity")
-
 function Player:processNecessities()
 	if not self:isLoggedIn() then
 		return false
@@ -198,6 +195,15 @@ function Player:getNecessity(necessity)
 		return self.m_Thirst
 	end
 	error("Invalid necessity passed to Player:getNecessity")
+end
+
+function Player:raiseNecessity(necessity, amount)
+	if necessity == NECESSITY_HUNGER then
+		self.m_Hunger = (self.m_Hunger + amount <= 100) and self.m_Hunger + amount or 100
+	elseif necessity == NECESSITY_THIRST then
+		self.m_Thirst = (self.m_Thirst + amount <= 100) and self.m_Thirst + amount or 100
+	end
+	error("Invalid necessity passed to Player:raiseNecessity")
 end
 
 function Player:isInfected()

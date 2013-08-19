@@ -58,6 +58,12 @@
 		<script src="server/classes/Inventory/Item.lua" type="server"/>
 		<script src="server/classes/Statistics.lua" type="server"/>
 		<script src="server/classes/Map.lua" type="server"/>
+		
+		<!-- Items -->
+		<script src="server/classes/Inventory/Items/ItemFood.lua" type="server"/>
+		<script src="server/classes/Inventory/Items/ItemMap.lua" type="server"/>
+		<script src="server/classes/Inventory/Items/ItemMedicKit.lua" type="server"/>
+		<script src="server/classes/Inventory/Items/ItemRadar.lua" type="server"/>
 	
 		<!-- data-only scripts -->
 		

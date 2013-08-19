@@ -15,7 +15,7 @@ function Singleton:getSingleton()
 end
 
 function Singleton:new(...)
-	self.new = function() error("You cannot instantiate singleton classes twice!") end
+	self.new = function() end
 	local inst = new(self, ...)
 	self.ms_Instance = inst
 	return inst

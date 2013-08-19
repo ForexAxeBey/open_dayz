@@ -218,16 +218,16 @@ end
 --||	@param:	vararg '...' 			  -	The parameters to bind to
 --||	@return:function - the bound function
 --\\
-function utils.class.bind(func, ...)
+function utils.class.bind(func, self, ...)
 	local boundArgs = {...}
-	return 
+	return
 		function(...) 
-			local arg = boundArgs
-			for k, v in pairs({...}) do
+			local arg = {...}
+			for k, v in ipairs(boundArgs) do
 				arg[#arg+1] = v
 			end
-			return func(unpack(arg)) 
-		end 
+			return func(self, unpack(arg))
+		end
 end
 
 --// utils.class.load(class, ...)

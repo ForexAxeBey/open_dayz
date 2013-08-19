@@ -28,21 +28,10 @@ function VehicleRPC.vehicleSetFuel(vehicle, fuel)
 	
 end
 
--- Todo: Move the following to somewhere else
-local vehicleComponents = {
-	[VEHICLE_COMPONENT_DOOR_LF] = "door_lf_dummy";
-	[VEHICLE_COMPONENT_DOOR_RF] = "door_rf_dummy";
-	[VEHICLE_COMPONENT_DOOR_LR] = "door_lr_dummy";
-	[VEHICLE_COMPONENT_DOOR_RR] = "door_rr_dummy";
-	-- Todo: Add mising fields
-}
-
-enum("VEHICLE_COMPONENT_DOOR_LF", "vehiclecomponents")
-
 function VehicleRPC.vehicleRemoveComponent(vehicle, component)
-	setVehicleComponentVisible(vehicle, vehicleComponents[component], false)
+	vehicle:removeComponent(component)
 end
 
 function VehicleRPC.vehicleAddComponent(vehicle, component)
-	setVehicleComponentVisible(vehicle, vehicleComponents[component], true)
+	vehicle:addComponent(component)
 end
