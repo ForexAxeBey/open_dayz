@@ -148,6 +148,7 @@
 		<script src="client/classes/LocalPlayer.lua" type="client"/>
 		<script src="client/classes/NPC.lua" type="client"/>
 		<script src="client/classes/Vehicle.lua" type="client"/>
+		<script src="client/classes/Speedometer.lua" type="client"/>
 		<script src="client/classes/Zombie.lua" type="client"/>
 		
 		<script src="client/classes/HUD/HUDElement.lua" type="client"/>
@@ -203,5 +204,12 @@
 	
 	<transferfile src="files/images/HUD/Hunger.png" onDemand="false"/>
 	<transferfile src="files/images/HUD/Thirst.png" onDemand="false"/>
+
+	<transferfile src="files/images/Speedometer/main.png" onDemand="false"/>
+	<transferfile src="files/images/Speedometer/main_needle.png" onDemand="false"/>
+	<transferfile src="files/images/Speedometer/engine_on.png" onDemand="false"/>
+	<transferfile src="files/images/Speedometer/engine_off.png" onDemand="false"/>
+	<transferfile src="files/images/Speedometer/fuel.png" onDemand="false"/>
+	<transferfile src="files/images/Speedometer/fuel_needle.png" onDemand="false"/>
 	
 </meta>

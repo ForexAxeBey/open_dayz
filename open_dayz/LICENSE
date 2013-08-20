@@ -17,4 +17,4 @@ The following files of Open MTA:DayZ are not licensed under the GNU General Publ
 	* shared/classlib.lua (MIT License)
 	* files/images/HUD/Hunger.png (commercial free, no backlink) - https://www.iconfinder.com/icons/106166/download/png/128
 	* files/images/HUD/Thirst.png (LinkWare) - http://icons.iconarchive.com/icons/skuzigraphic/recycling/128/can-icon.png
-	* 
+	* files/images/HUD/Speedometer/* - author: thefleshpound

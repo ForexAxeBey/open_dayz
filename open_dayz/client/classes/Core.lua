@@ -25,6 +25,7 @@ function Core:constructor()
 	
 	-- Initialize HUD system
 	HUDArea:new()
+	Speedometer:new()
 	
 	FirstPersonMode:new()
 
@@ -47,6 +48,7 @@ end
 
 function Core:destructor()
 	delete(GUICursor:getSingleton())
+	delete(Speedometer:getSingleton())
 	
 	-- Delete managers
 	delete(PlayerManager)
