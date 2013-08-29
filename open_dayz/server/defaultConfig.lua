@@ -44,6 +44,7 @@ local defaultConfig =
 	
 	player = {
 		respawntime = 2000;
+		talkdistance = 100;
 	};
 	
 	global = {
