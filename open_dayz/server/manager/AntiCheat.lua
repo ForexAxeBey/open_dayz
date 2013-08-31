@@ -27,19 +27,19 @@ function AntiCheat:removeCheater(player, violation)
 	if violation == CHEAT_D3D9_DLL then
 		reason = _("You violated the anti cheating rules of this server (Modified d3d9.dll)", player)
 		logmsg = "custom d3d9.dll"
-	elseif violation == CHEAT_D3D9_DLL then
+	elseif violation == CHEAT_TEXTURE_MOD then
 		reason = _("You violated the anti cheating rules of this server (Texture Mod)", player)
 		logmsg = "texture mod"
-	elseif violation == CHEAT_D3D9_DLL then
+	elseif violation == CHEAT_WEAPON_MOD then
 		reason = _("You violated the anti cheating rules of this server (Weapon Mod)", player)
 		logmsg = "weapon mod"
-	elseif violation == CHEAT_D3D9_DLL then
+	elseif violation == CHEAT_VEHICLE_MOD then
 		reason = _("You violated the anti cheating rules of this server (Vehicle Mod)", player)
 		logmsg = "vehicle mod"
-	elseif violation == CHEAT_D3D9_DLL then
+	elseif violation == CHEAT_SKIN_MOD then
 		reason = _("You violated the anti cheating rules of this server (Skin Mod)", player)
 		logmsg = "skin mod"
-	elseif violation == CHEAT_D3D9_DLL then
+	elseif violation == CHEAT_OBJECT_MOD then
 		reason = _("You violated the anti cheating rules of this server (Object Mod)", player)
 		logmsg = "object mod"
 	elseif violation == CHEAT_FUEL_DESYNC then
