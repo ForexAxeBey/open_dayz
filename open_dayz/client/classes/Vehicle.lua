@@ -10,6 +10,7 @@ registerElementClass("vehicle", Vehicle)
 
 function Vehicle:constructor()
 	self.m_Fuel = 100
+	self.m_EngineState = false;
 
 	-- Add event handlers
 	addEventHandler("onClientVehicleEnter", self, bind(self.Event_vehicleEnter, self))
@@ -24,11 +25,24 @@ function Vehicle:getFuel()
 	return self.m_Fuel
 end
 
+function Vehicle:startEngine()
+	-- In case of any component is broken or missing, don't start
+	self.m_EngineState = true
+	setVehicleEngineState(self, true)
+	return true
+end
+
+function Vehicle:stopEngine()
+	-- In case of any component is broken or missing, don't start
+	self.m_EngineState = false
+	setVehicleEngineState(self, false)
+	return true
+end
 
 function Vehicle:Event_vehicleEnter(player, seat)
 	if player == localPlayer then
 		self.m_FuelTimer = setTimer(function() self.m_Fuel = self.m_Fuel - 0.05 end, 2000, 0)
-		
+		self.m_EngineTimer = setTimer(setVehicleEngineState, 100, 1, self, self.m_EngineState)
 	end
 end
 
@@ -37,6 +51,9 @@ function Vehicle:Event_vehicleExit(player, seat)
 		-- First some clean-ups
 		if self.m_FuelTimer and isTimer(self.m_FuelTimer) then
 			killTimer(self.m_FuelTimer)
+		end
+		if self.m_EngineTimer and isTimer(self.m_EngineTimer) then
+			killTimer(self.m_EngineTimer)
 		end
 		
 		-- Do the exit sync

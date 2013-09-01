@@ -8,6 +8,7 @@
 VehicleRPC = inherit(RPC)
 
 function VehicleRPC:constructor()
+	self:register(RPC_VEHICLE_STARTENGINE, VehicleRPC.startEngine)
 	self:register(RPC_VEHICLE_ENTER_SYNC, VehicleRPC.vehicleEnterSync)
 	self:register(RPC_VEHICLE_SET_FUEL, VehicleRPC.vehicleSetFuel)
 	self:register(RPC_VEHICLE_REMOVE_COMPONENT, VehicleRPC.vehicleRemoveComponent)
@@ -18,9 +19,12 @@ function VehicleRPC.toElement(element)
 	return element
 end
 
+function VehicleRPC.startEngine(vehicle, fuel)
+	vehicle:startEngine()
+end
+
 function VehicleRPC.vehicleEnterSync(vehicle, fuel)
 	vehicle.m_Fuel = fuel -- Since we do not want to allow access via addon we have to modify it directly here
-	
 end
 
 function VehicleRPC.vehicleSetFuel(vehicle, fuel)

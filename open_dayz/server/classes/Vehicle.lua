@@ -21,9 +21,10 @@ end
 
 function Vehicle:onStartEnter(player, seat, jacked, door)
 	-- Todo: Use a bind instead
-	if not self:startEngine() then
+	--[[if not self:startEngine() then
 		player:sendMessage(_("The engine could not be started due to broken or missing components. Please find and collect them first!", player), 255, 0, 0)
-	end
+	end]]--
+	
 end
 
 function Vehicle:getFuel()
@@ -45,7 +46,8 @@ function Vehicle:startEngine()
 		return false
 	end
 	
-	setVehicleEngineState(self, true)
+	self:rpc(RPC_VEHICLE_STARTENGINE, true) -- HOW-TO?
+	--setVehicleEngineState(self, true)
 	return true
 end
 

@@ -33,6 +33,7 @@ RPCs = {
 	enum("RPC_SERVER_SET_CONFIG", "rpc");
 	
 	-- Vehicle RPCs
+	enum("RPC_VEHICLE_STARTENGINE", "rpc");
 	enum("RPC_VEHICLE_ENTER_SYNC", "rpc");
 	enum("RPC_VEHICLE_EXIT_SYNC", "rpc");
 	enum("RPC_VEHICLE_SET_FUEL", "rpc");
