@@ -6,7 +6,7 @@
 	-->
 	
 	<oop>false</oop>
-	<min_mta_version server="1.3.2" client="1.3.2" />
+	<min_mta_version server="1.3.3" client="1.3.3" />
 	<include resource="freeroam"/><!-- remove this before release -->
 	
 	<aclrequest>
@@ -37,6 +37,7 @@
 	<script src="shared/classes/File.lua" type="shared"/>
 	<script src="shared/classes/CachedFile.lua" type="shared"/>
 	<script src="shared/classes/Queue.lua" type="shared"/>
+	<script src="shared/classes/Log.lua" type="shared"/>
 	
 	<script src="shared/manager/TranslationManager.lua" type="shared"/>
 	

@@ -19,10 +19,15 @@ enum("CHEAT_OBJECT_MOD", "anticheat")
 function AntiCheat:constructor()
 	addEventHandler("onPlayerModInfo", root, bind(AntiCheat.onPlayerModInfo, self))
 	self.m_WatchedPlayers = {}
+	self.m_Log = Log:new("logs/anticheat.log")
+end
+
+function AntiCheat:destructor()
+	delete(self.m_Log)
 end
 
 function AntiCheat:removeCheater(player, violation)
-	local reason = _("You violated the anti cheating rules of this server (", player)
+	local reason = ""
 	local logmsg = ""
 	if violation == CHEAT_D3D9_DLL then
 		reason = _("You violated the anti cheating rules of this server (Modified d3d9.dll)", player)
@@ -47,7 +52,7 @@ function AntiCheat:removeCheater(player, violation)
 		logmsg = "fuel desync"
 	end
 	
-	-- add a message to a log here
+	self.m_Log:log("%s (Serial: %s) has been kicked for an anticheat violation (%s)", getPlayerName(player), getPlayerSerial(player), logmsg)
 	kickPlayer(player, "Anticheat", reason)
 end
 
