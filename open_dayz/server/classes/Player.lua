@@ -16,6 +16,8 @@ function Player:constructor()
 	self.m_Inventory = false
 	self.m_Kills = 0
 	self.m_Deaths = 0
+	self.m_Chat = ChatRoom:new()
+	self.m_Chat:setRange(core:get("player", "talkdistance"))
 end
 
 function Player:destructor()
@@ -193,8 +195,9 @@ function Player:getNecessity(necessity)
 		return self.m_Hunger
 	elseif necessity == NECESSITY_THIRST then
 		return self.m_Thirst
+	else
+		error("Invalid necessity passed to Player:getNecessity")
 	end
-	error("Invalid necessity passed to Player:getNecessity")
 end
 
 function Player:raiseNecessity(necessity, amount)
@@ -202,8 +205,9 @@ function Player:raiseNecessity(necessity, amount)
 		self.m_Hunger = (self.m_Hunger + amount <= 100) and self.m_Hunger + amount or 100
 	elseif necessity == NECESSITY_THIRST then
 		self.m_Thirst = (self.m_Thirst + amount <= 100) and self.m_Thirst + amount or 100
+	else
+		error("Invalid necessity passed to Player:raiseNecessity")
 	end
-	error("Invalid necessity passed to Player:raiseNecessity")
 end
 
 function Player:isInfected()
@@ -224,4 +228,18 @@ end
 
 function Player:addDeaths(n)
 	self.m_Deaths = self.m_Deaths + n
+end
+
+function Player:chat(chatid, message)
+	if chatid == CHAT_LOCAL then
+		self.m_Chat:sendMessage(self, message)
+	elseif chatid == CHAT_GROUP then
+		if self.m_Group then
+			self.m_Group:sendMessage(self, message)
+		end
+	elseif chatid == CHAT_ADMIN then
+		core:getAdminChat():sendMessage(self, message)
+	elseif	chatid == CHAT_GLOBAL then
+		core:getGlobalChat():sendMessage(self, message)
+	end
 end

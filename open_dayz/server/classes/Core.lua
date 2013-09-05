@@ -65,6 +65,11 @@ function Core:constructor()
 	setTime(realtime.hour, realtime.minute)
     setMinuteDuration(60000*self:get("global", "timescale"))
 	
+	-- Chat Rooms
+	self.m_GlobalChat = ChatRoom:new()
+	self.m_GlobalChat.m_Players = "all"
+	self.m_AdminChat = ChatRoom:new()
+	
 	-- Disable statistics if debugging mode is on
 	if not DEBUG then
 		Statistics:new()
@@ -121,4 +126,12 @@ function Core:onConfigChange(config, group, key, oldvalue, newvalue)
 		self.m_ClientConfig["weather"][key] = self.m_ClientConfig["weather"][key] or {}
 		self.m_ClientConfig["weather"][key] = newvalue
 	end
+end
+
+function Core:getGlobalChat()
+	return self.m_GlobalChat
+end
+
+function Chat:getAdminChat()
+	return self.m_AdminChat
 end

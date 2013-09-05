@@ -23,3 +23,9 @@ enum("VEHICLE_COMPONENT_WHEEL_RB", "vehiclecomponent")
 
 enum("NECESSITY_HUNGER", "necessity")
 enum("NECESSITY_THIRST", "necessity")
+
+enum("CHAT_LOCAL", 	"chat")
+enum("CHAT_GROUP", 	"chat")
+enum("CHAT_GLOBAL", "chat")
+enum("CHAT_ADMIN", 	"chat")
+

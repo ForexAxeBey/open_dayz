@@ -17,6 +17,7 @@ enum("GROUP_RANK_LEADER", "grouprank")
 function Group:constructor(param1)
 	Async.create(function()
 		self.m_Members = {}
+		self.m_Chat = ChatRoom:new()
 
 		if type(param1) == "number" then
 			local Id = param1
@@ -98,8 +99,6 @@ function Group:getMemberRank(player)
 	return self.m_Members[player:getId()]
 end
 
-function Group:sendMessage(text, r, g, b, ...)
-	for k, player in ipairs(getElementsByType("player")) do
-		player:sendMessage(text:format(...), r, g, b)
-	end
+function Group:sendMessage(player, text, ...)
+	self.m_Chat:sendMessage(player, text, ...)
 end
