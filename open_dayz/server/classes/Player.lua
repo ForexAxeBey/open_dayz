@@ -1,8 +1,8 @@
 -- ****************************************************************************
 -- *
--- *  PROJECT:     Open MTA:DayZ
--- *  FILE:        server/classes/Player.lua
--- *  PURPOSE:     Player element class
+-- *  PROJECT:	 Open MTA:DayZ
+-- *  FILE:		server/classes/Player.lua
+-- *  PURPOSE:	 Player element class
 -- *
 -- ****************************************************************************
 Player = inherit(MTAElement)
@@ -18,6 +18,16 @@ function Player:constructor()
 	self.m_Deaths = 0
 	self.m_Chat = ChatRoom:new()
 	self.m_Chat:setRange(core:get("player", "talkdistance"))
+	self.m_Temperature = 37
+	self.m_BloodLoss = 0
+	self.m_Status = {}
+	local status = self.m_Status
+	status.BrokenBone = false;
+	status.Shock = false;
+	status.Pain = false;
+	status.Infected = false;
+	status.Unconscious = false;
+	status.Cold = false;
 end
 
 function Player:destructor()
