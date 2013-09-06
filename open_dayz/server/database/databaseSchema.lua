@@ -41,6 +41,10 @@ DBSchema.player = {
 { name = "PosZ",	vartype = "float", 	 allowNULL = true };
 { name = "Rotation",vartype = "float", 	 allowNULL = true };
 { name = "Interior",vartype = "tinyint", allowNULL = true };
+{ name = "BloodLoss",	vartype = "float", 	 allowNULL = true }; --Idea: Bloodloss per second is stored, so if he gets shot twice, he loses double the amount of blood. This way it can be used by Add-Ons.
+{ name = "Temperature",	vartype = "float", 	 allowNULL = true }; --Idea: Its the goddamn temperature.
+{ name = "Blood",	vartype = "float", 	 allowNULL = true }; --Idea: Don't worry, its just ketchup.
+{ name = "Status",	vartype = "int", 	 allowNULL = true }; --Idea: Broken Bones, Shock, Pain, Unconscious, Infection can be stored as "flags", that means as bits. Pro: Flagpool can be used by Add-Ons.
 { name = "Inventory",vartype = "int", 	 allowNULL = false, default = -1 };
 { name = "Kills",	vartype = "int",	 unsigned = true, allowNULL = true };
 { name = "Deaths",  vartype = "int",	 unsigned = true, allowNULL = true };

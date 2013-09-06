@@ -33,9 +33,17 @@ function Player:save()
 	local posX, posY, posZ = getElementPosition(self)
 	local _, _, rotation = getElementRotation(self)
 	local interior = getElementInterior(self)
+	local iStatus = 0
+	local status = self.m_Status
+	if status.BrokenBone then 	iStatus = iStatus + 1 end
+	if status.Shock then		iStatus = iStatus + 2 end
+	if status.Pain then			iStatus = iStatus + 4 end
+	if status.Infected then		iStatus = iStatus + 8 end
+	if status.Unconscious then	iStatus = iStatus + 16 end
+	if status.Cold then			iStatus = iStatus + 32 end
 
-	sql:queryExec("UPDATE ??_player SET PosX = ?, PosY = ?, PosZ = ?, Rotation = ?, Interior = ?, Kills = ?, Deaths = ? WHERE Id = ?", sql:getPrefix(),
-		posX, posY, posZ, rotation, interior, self.m_Kills, self.m_Deaths, self.m_Id)
+	sql:queryExec("UPDATE ??_player SET PosX = ?, PosY = ?, PosZ = ?, Rotation = ?, Interior = ?, Kills = ?, Deaths = ?, Blood = ?, BloodLoss = ?, Temperature = ?, Status = ? WHERE Id = ?", sql:getPrefix(),
+		posX, posY, posZ, rotation, interior, self.m_Kills, self.m_Deaths, self.m_Blood, self.m_BloodLoss, self.m_Temperature, iStatus, self.m_Id)
 		
 	if self.m_Inventory.m_Id == -1 then
 		self.m_Inventory:save()
@@ -47,7 +55,7 @@ end
 
 function Player:load()
 	-- Get all necessary data
-	sql:queryFetchSingle(Async.waitFor(self), "SELECT Admin, Locale, PosX, PosY, PosZ, Rotation, Interior, Inventory, Kills, Deaths FROM ??_player WHERE Id = ?", sql:getPrefix(), self.m_Id)
+	sql:queryFetchSingle(Async.waitFor(self), "SELECT Admin, Locale, PosX, PosY, PosZ, Rotation, Interior, Inventory, Kills, Deaths, Blood, BloodLoss, Temperature, Status FROM ??_player WHERE Id = ?", sql:getPrefix(), self.m_Id)
 	local row = Async.wait()
 	
 	self.m_Admin 	= tonumber(row.Admin)
@@ -57,6 +65,19 @@ function Player:load()
 	--self.m_Inventory:addClient(self) -- Jusonex: There is no method named "addClient"?!
 	self.m_Kills	= tonumber(row.Kills)
 	self.m_Deaths	= tonumber(row.Deaths)
+	self.m_Blood = tonumber(row.Blood)
+	self.m_BloodLoss = tonumber(row.BloodLoss)
+	self.m_Temperature = tonumber(row.Temperature)
+	
+	local iStatus = tonumber(row.Status)
+	self.m_Status = {}
+	status = self.m_Status
+	status.BrokenBone = 	(bitAnd ( iStatus, 1 ) ~= 0)
+	status.Shock = 			(bitAnd ( iStatus, 2 ) ~= 0)
+	status.Pain = 			(bitAnd ( iStatus, 4 ) ~= 0)
+	status.Infected = 		(bitAnd ( iStatus, 8 ) ~= 0)
+	status.Unconscious = 	(bitAnd ( iStatus, 16 ) ~= 0)
+	status.Cold = 			(bitAnd ( iStatus, 32 ) ~= 0)
 	
 	spawnPlayer(self, row.PosX, row.PosY, row.PosZ, row.Rotation, 0, row.Interior)
 	fadeCamera(self, true)
@@ -169,6 +190,13 @@ function Player:respawn()
 	setCameraTarget(self, self)
 end
 
+function Player:processBloodLoss()
+	if self.m_BloodLoss > 0.001 then
+		self.m_Blood = self.m_Blood - self.m_BloodLoss/10 -- if the "bloodloss per second" is stored, and we call the bloodloss once per 100 ms, you need to divide
+		self.m_BloodLoss = self.m_BloodLoss - 0.1 -- normally bleeding stops after a while. In this case, you would bleed to death if your bloodloss is untreatet and you have 12000 blood at a bloodloss starting rate of about 100 to 200 and would bleed for 200 seconds.
+	end
+end
+
 function Player:processNecessities()
 	if not self:isLoggedIn() then
 		return false
@@ -180,10 +208,19 @@ function Player:processNecessities()
 	if self.m_Hunger < 0 then self.m_Hunger = 0 end
 	if self.m_Thirst < 0 then self.m_Thirst = 0 end
 	
-	-- Possibility of 1:100 to get an infect
-	if chance(1) then
-		self.m_Infected = true
-		self:sendMessage("Fuck, you are infected!", 255, 0, 0)
+	-- Possibility of 1:100 to get an infect if you are cold: http://dayz.gamepedia.com/Infection#Infection
+	local status = self.m_Status
+	if self.m_Temperature < 36 then
+		if chance(1) then
+			status.Infected = true
+			self:sendMessage("Oh, you don't feel too good! It seems you are seriously infected.", 255, 0, 0)
+		end
+		if self.m_Temperature < 33 then
+			if staus.Cold == false then
+				status.Cold = true
+				self:sendMessage("You feel a bit ill, it appears to be a cold.", 255, 0, 0)
+			end
+		end
 	end
 	
 	-- Inform the client

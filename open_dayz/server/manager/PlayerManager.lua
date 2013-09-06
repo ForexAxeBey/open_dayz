@@ -17,6 +17,7 @@ function PlayerManager:constructor()
 		enew(player, Player)
 	end
 	
+	self.m_BleedQueue = Queue:new(100, function() return getElementsByType("player") end, Player.processBloodLoss)
 	self.m_NecessityQueue = Queue:new(5000, function() return getElementsByType("player") end, Player.processNecessities)
 	if not DEBUG then self.m_SavingQueue = Queue:new(10000, function() return getElementsByType("player") end, Player.save) end
 end
