@@ -132,6 +132,6 @@ function Core:getGlobalChat()
 	return self.m_GlobalChat
 end
 
-function Chat:getAdminChat()
+function Core:getAdminChat()
 	return self.m_AdminChat
 end
