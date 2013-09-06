@@ -19,6 +19,7 @@ function Player:constructor()
 	self.m_Chat = ChatRoom:new()
 	self.m_Chat:setRange(core:get("player", "talkdistance"))
 	self.m_Temperature = 37
+	self.m_Blood = 12000
 	self.m_BloodLoss = 0
 	self.m_Status = {}
 	local status = self.m_Status
