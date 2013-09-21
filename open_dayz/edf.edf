@@ -12,9 +12,14 @@
 		<data name="dimension" type="integer" description="MTA dimension" default="0" />
 	</element>
 	<element name="nozombiearea" friendlyname="Zombie Free Area">
-		<data name="positionA" type="coord3d" description="XYZ position" default="0,0,0" />
-		<data name="positionB" type="coord3d" description="XYZ position" default="0,0,0" />
+		<data name="position" type="coord3d" description="XYZ position" default="0,0,0" />
+		<data name="width" type="number" description="Area width" default="10" />
+		<data name="height" type="number" description="Area height" default="10" />
 		<data name="interior" type="integer" description="GTA interior world" default="0" />
 		<data name="dimension" type="integer" description="MTA dimension" default="0" />
+		<object model="1234" editorOnly="true" alpha="0" interior="!interior!" dimension="!dimension!"/>
 	</element>
+	
+	<!-- scripts section -->
+	<script src="client/editorHelper.lua" type="client"/>
 </def>
