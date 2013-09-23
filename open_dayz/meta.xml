@@ -106,8 +106,9 @@
 	<script src="client/globals.lua" type="client"/>
 	<script src="client/events.lua" type="client"/>
 	
-		<!-- debugging stuff -->
+		<!-- debugging stuff + tools -->
 		<script src="client/classes/Debugging.lua" type="client"/>
+		<script src="client/classes/GUITool.lua" type="client"/>
 		
 		<!-- RPC handlers -->
 		<script src="client/classes/RPCHandler/NpcRPC.lua" type="client"/>

@@ -105,6 +105,15 @@ function CacheArea:setCachingEnabled(state)
 		-- Create our renderTarget
 		self.m_RenderTarget = dxCreateRenderTarget(self.m_Width, self.m_Height, true)
 		
+		-- Add references
+		local children = self.m_Children
+		while children and #children > 0 do
+			for k, v in ipairs(children) do
+				v.m_CacheArea = self
+			end
+			children = children.m_Children
+		end
+		
 	elseif self.m_CachingEnabled and not state then
 		-- Do the recent steps in reverse
 		for k, v in ipairs(self.m_Children) do
@@ -116,7 +125,7 @@ function CacheArea:setCachingEnabled(state)
 		
 		-- Remove references
 		local children = self.m_Children
-		while #children > 0 do
+		while children and #children > 0 do
 			for k, v in ipairs(children) do
 				v.m_CacheArea = nil
 			end
@@ -124,4 +133,5 @@ function CacheArea:setCachingEnabled(state)
 		end
 	end
 	self.m_CachingEnabled = state
+	self:anyChange()
 end

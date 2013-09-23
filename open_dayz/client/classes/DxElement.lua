@@ -118,19 +118,30 @@ function DxElement:setParent(parent)
 	self:anyChange()
 end
 
-function DxElement:getPosition()
-	return self.m_PosX, self.m_PosY
+function DxElement:getPosition(isAbsolute)
+	if not isAbsolute then
+		return self.m_PosX, self.m_PosY
+	end
+	
+	local absoluteX, absoluteY = self.m_AbsoluteX, self.m_AbsoluteY
+	if self.m_CacheArea then
+		absoluteX, absoluteY = absoluteX + self.m_CacheArea.m_AbsoluteX, absoluteY + self.m_CacheArea.m_AbsoluteY
+	end
+	return absoluteX, absoluteY
 end
 
 function DxElement:setPosition(posX, posY)
+	local diffX, diffY = posX-self.m_PosX, posY-self.m_PosY
 	self.m_PosX, self.m_PosY = posX, posY
-
-	self.m_AbsoluteX, self.m_AbsoluteY = posX, posY
-	local lastElement = parent or {}
-	while lastElement.m_Parent do
-		self.m_AbsoluteX = self.m_AbsoluteX + lastElement.m_PosX
-		self.m_AbsoluteY = self.m_AbsoluteY + lastElement.m_PosY
-		lastElement = lastElement.m_Parent
+	self.m_AbsoluteX, self.m_AbsoluteY = self.m_AbsoluteX + diffX, self.m_AbsoluteY + diffY
+	
+	local children = self.m_Children
+	while children and #children > 0 do
+		for k, v in ipairs(children) do
+			v.m_AbsoluteX = v.m_AbsoluteX + diffX
+			v.m_AbsoluteY = v.m_AbsoluteY + diffY
+		end
+		children = children.m_Children
 	end
 
 	self:anyChange()

@@ -24,6 +24,9 @@ function Core:constructor()
 	ClickHandler:new()
 	
 	-- Initialize GUI forms
+	if DEBUG then
+		GUITool:new()
+	end
 	self.m_LoginForm = FormLogin:new()
 	
 	-- Initialize HUD system
