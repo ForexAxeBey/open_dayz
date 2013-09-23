@@ -21,7 +21,13 @@ function GUIElement:constructor(posX, posY, width, height, parent)
 end
 
 function GUIElement:performChecks(mouse1, mouse2, cx, cy)
-	local inside = (self.m_AbsoluteX <= cx and self.m_AbsoluteY <= cy and self.m_AbsoluteX + self.m_Width > cx and self.m_AbsoluteY + self.m_Height > cy)
+	local absoluteX, absoluteY = self.m_AbsoluteX, self.m_AbsoluteY
+	if self.m_CacheArea then
+		absoluteX = absoluteX + self.m_CacheArea.m_AbsoluteX
+		absoluteY = absoluteY + self.m_CacheArea.m_AbsoluteY
+	end
+	
+	local inside = (absoluteX <= cx and absoluteY <= cy and absoluteX + self.m_Width > cx and absoluteY + self.m_Height > cy)
 	
 	if self.m_LActive and not mouse1 then
 		if self.onLeftClickUp			then self:onLeftClickUp()			end

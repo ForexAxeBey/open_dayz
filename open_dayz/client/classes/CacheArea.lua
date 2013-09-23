@@ -113,6 +113,15 @@ function CacheArea:setCachingEnabled(state)
 		
 		-- Destroy the renderTarget to clear it
 		if self.m_RenderTarget and isElement(self.m_RenderTarget) then destroyElement(self.m_RenderTarget) end
+		
+		-- Remove references
+		local children = self.m_Children
+		while #children > 0 do
+			for k, v in ipairs(children) do
+				v.m_CacheArea = nil
+			end
+			children = children.m_Children
+		end
 	end
 	self.m_CachingEnabled = state
 end

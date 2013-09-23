@@ -23,6 +23,9 @@ function Core:constructor()
 	GUICursor:new()
 	ClickHandler:new()
 	
+	-- Initialize GUI forms
+	self.m_LoginForm = FormLogin:new()
+	
 	-- Initialize HUD system
 	HUDArea:new()
 	Speedometer:new()

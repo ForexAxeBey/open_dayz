@@ -28,16 +28,26 @@ function DxElement:constructor(posX, posY, width, height, parent)
 	self:anyChange()
 	self.m_CurrentRenderTarget = false
 	
+	-- Find cache area if exists
+	if self.m_Parent and instanceof(self.m_Parent, CacheArea) and self.m_Parent.m_CachingEnabled then
+		self.m_CacheArea = self.m_Parent
+	end
+	if self.m_Parent and self.m_Parent.m_CacheArea and self.m_Parent.m_CacheArea.m_CachingEnabled then
+		self.m_CacheArea = self.m_Parent.m_CacheArea
+	end
+	
 	-- AbsX and AbsY
-	self.m_AbsoluteX, self.m_AbsoluteY = posX, posY
+	self.m_AbsoluteX, self.m_AbsoluteY = self.m_PosX, self.m_PosY
 	local lastElement = parent
 	while lastElement do
-		-- Ignore cache areas as rendertargets has their position themself
-		if not instanceof(lastElement, CacheArea) then
-			self.m_AbsoluteX = self.m_AbsoluteX + lastElement.m_PosX
-			self.m_AbsoluteY = self.m_AbsoluteY + lastElement.m_PosY
-		end
+		self.m_AbsoluteX = self.m_AbsoluteX + lastElement.m_PosX
+		self.m_AbsoluteY = self.m_AbsoluteY + lastElement.m_PosY
 		lastElement = lastElement.m_Parent
+	end
+	-- Ignore cache areas as rendertargets have their own offset position
+	if self.m_CacheArea then
+		self.m_AbsoluteX = self.m_AbsoluteX - self.m_CacheArea.m_AbsoluteX
+		self.m_AbsoluteY = self.m_AbsoluteY - self.m_CacheArea.m_AbsoluteY
 	end
 end
 
