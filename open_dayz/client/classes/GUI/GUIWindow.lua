@@ -51,10 +51,10 @@ function GUIWindow:drawThis()
 
 	if self.m_HasTitlebar then
 		-- Draw line under title bar
-		dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY + self.m_Height/10, self.m_Width, 2, tocolor(0, 0, 0, 127))
+		dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY + 30, self.m_Width, 2, Color.White)
 
 		-- Draw title
-		dxDrawText(self.m_Text, self.m_AbsoluteX, self.m_AbsoluteY, self.m_AbsoluteX + self.m_Width, self.m_AbsoluteY + self.m_Height/10, tocolor(0, 0, 0, 127), 1.4, "tahoma", "center", "center")
+		dxDrawText(self.m_Text, self.m_AbsoluteX, self.m_AbsoluteY+7, self.m_AbsoluteX + self.m_Width, self.m_AbsoluteY + 25, Color.White, 1.4, "tahoma", "center", "center")
 	end
 	
 	dxSetBlendMode("blend")
