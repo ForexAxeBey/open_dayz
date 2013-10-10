@@ -29,6 +29,17 @@ function Player:constructor()
 	status.Infected = false;
 	status.Unconscious = false;
 	status.Cold = false;
+	self:lock(true);
+end
+
+function Player:lock(bLocked)
+	if bLocked then
+		setElementPosition(self,math.random(-8000,8000),math.random(-8000,8000),2000);
+		setElementAlpha(self,0);
+	else
+		setElementAlpha(self,255);
+	end
+	setElementFrozen (self,bLocked)
 end
 
 function Player:destructor()
@@ -89,6 +100,8 @@ function Player:load()
 	status.Infected = 		(bitAnd ( iStatus, 8 ) ~= 0)
 	status.Unconscious = 	(bitAnd ( iStatus, 16 ) ~= 0)
 	status.Cold = 			(bitAnd ( iStatus, 32 ) ~= 0)
+	
+	self:lock(false);
 	
 	spawnPlayer(self, row.PosX, row.PosY, row.PosZ, row.Rotation, 0, row.Interior)
 	fadeCamera(self, true)
