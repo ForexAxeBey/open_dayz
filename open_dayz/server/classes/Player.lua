@@ -101,8 +101,6 @@ function Player:load()
 	status.Unconscious = 	(bitAnd ( iStatus, 16 ) ~= 0)
 	status.Cold = 			(bitAnd ( iStatus, 32 ) ~= 0)
 	
-	self:lock(false);
-	
 	spawnPlayer(self, row.PosX, row.PosY, row.PosZ, row.Rotation, 0, row.Interior)
 	fadeCamera(self, true)
 	setCameraTarget(self, self)
@@ -126,6 +124,9 @@ function Player:login(username, password)
 		self:rpc(RPC_PLAYER_LOGIN, RPC_STATUS_ERROR, RPC_STATUS_ALREADY_LOGGED_IN)
 		return false
 	end
+
+	--be sure he is unlocked
+	self:lock(false);
 	
 	-- Ask SQL to fetch the salt
 	sql:queryFetchSingle(Async.waitFor(self), "SELECT Id, Salt FROM ??_player WHERE Name = ? ", sql:getPrefix(), username)
@@ -148,7 +149,7 @@ function Player:login(username, password)
 	self.m_Id = row.Id
 	self:rpc(RPC_PLAYER_LOGIN, RPC_STATUS_SUCCESS)
 	self:load()
-	
+
 	callEvent("onPlayerLoggedIn", self, username)
 end
 
