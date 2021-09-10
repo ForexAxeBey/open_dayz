@@ -3,7 +3,7 @@
 -- *  PROJECT:     Open MTA:DayZ
 -- *  FILE:        server/manager/PlayerManager.lua
 -- *  PURPOSE:     Player manager
--- *
+-- *  SERKAN KARAAĞAÇ | GRAND DAYZ
 -- ****************************************************************************
 PlayerManager = inherit(Singleton)
 
